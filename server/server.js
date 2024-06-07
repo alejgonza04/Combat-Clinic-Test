@@ -8,7 +8,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin: 'https://luminous-frangollo-2efcc0.netlify.app' // Allow requests from this origin
+    origin: 'https://whimsical-custard-923773.netlify.app' // Allow requests from this origin
   }));
 app.use(express.json());
 
