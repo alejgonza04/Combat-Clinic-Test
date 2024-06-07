@@ -18,7 +18,7 @@ display: flex;
 justify-content: center;
 align-items: flex-start;
 overflow-y: scroll;
-overflow-x: hidden;
+overflow-x: scroll;
 width: 100%; /* Ensure full width */
 `;
 
