@@ -8,7 +8,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin: 'http://localhost:3000' // Allow requests from this origin
+    origin: 'https://wondrous-longma-50e5ed.netlify.app' // Allow requests from this origin
   }));
 app.use(express.json());
 
