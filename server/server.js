@@ -14,6 +14,10 @@ app.use(express.json());
 
 connectDB();
 
+app.get('/', (req, res) => {
+    res.send('Hello, World!');
+});
+
 app.use('/auth', authRoutes);
 
 const startServer = async () => {
