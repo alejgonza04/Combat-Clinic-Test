@@ -19,11 +19,12 @@ justify-content: center;
 align-items: flex-start;
 overflow-y: scroll;
 overflow-x: hidden;
+width: 100%; /* Ensure full width */
 `;
 
 const Wrapper = styled.div`
 flex: 1;
-max-width: 1500px;
+max-width: 100%; /* Ensure full width */
 display: flex;
 justify-content: center;
 align-items: center;
@@ -32,7 +33,7 @@ flex-direction: column;
 
 const CardWrapper = styled.div`
 flex: 1;
-max-width: 1500px;
+max-width: 100%; /* Adjust to your preference */
 display: flex;
 justify-content: center;
 align-items: center;
@@ -106,7 +107,6 @@ font-size: 25px;
 const OuterCard2 = styled.div`
 height: 400px;
 width: 100%;
-min-width: 2000px;
 border-radius: 20px;
 background-color: ${({ theme }) => theme.red}
 box-shadow: 1px 6px 20px 0px ${({ theme }) => theme.black + 15};
