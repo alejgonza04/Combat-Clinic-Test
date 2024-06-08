@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from 'react-router-dom';
 
 const Container = styled.div`
 height: 100%;
@@ -58,7 +57,7 @@ color: white;
 font-size: 60px;
 padding: 10px;
 @media (max-width: 450px) {
-  font-size: 55px;
+  font-size: 35px;
 }
 `;
 
@@ -72,7 +71,7 @@ color: ${({ theme }) => theme.red};
   font-size: 30px;
 }
 @media (max-width: 450px) {
-  font-size: 20px;
+  font-size: 15px;
 }
 `;
 
@@ -100,7 +99,7 @@ text-decoration: none;
   color: ${({ theme }) => theme.red};
 }
 @media (max-width: 450px) {
-  font-size: 45px;
+  font-size: 35px;
 }
 `;
 
