@@ -24,6 +24,7 @@ align-items: center;
 gap: 22px;
 @media (max-width: 768px){
     flex-direction: column;
+    padding: 0px 0px 50px 0px
 }
 `;
 
@@ -57,14 +58,12 @@ align-items: center;
 margin-top: 1;
 @media (max-width: 768px) {
     padding: 16px;
-    border-radius: 10px;
     width: 600px;
     height: auto;
     border-radius: 20px;
 }
 @media (max-width: 450px) {
     padding: 16px;
-    border-radius: 10px;
     width: 300px;
     height: auto;
     border-radius: 20px;
@@ -86,14 +85,12 @@ align-items: center;
 margin-top: 1;
 @media (max-width: 768px) {
   padding: 16px;
-  border-radius: 10px;
   width: 600px;
   height: auto;
   border-radius: 20px;
 }
 @media (max-width: 450px) {
     padding: 16px;
-    border-radius: 10px;
     width: 300px;
     height: auto;
     border-radius: 20px;
