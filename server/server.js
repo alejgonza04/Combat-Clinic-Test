@@ -8,7 +8,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin: 'https://verdant-fairy-45e354.netlify.app/' // Allow requests from this origin
+    origin: 'https://verdant-fairy-45e354.netlify.app' // Allow requests from this origin
   }));
 app.use(express.json());
 
