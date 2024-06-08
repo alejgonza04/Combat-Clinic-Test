@@ -26,7 +26,7 @@ gap: 22px;
 flex-direction: column;
 @media (max-width: 600px){
     gap: 12px;
-    padding: 0px 0px 50px 0px
+    padding: 0px 0px 150px 0px;
 }
 `;
 
