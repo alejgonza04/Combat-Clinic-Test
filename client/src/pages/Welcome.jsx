@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import styled from "styled-components";
 import welcomeBackground from "../utils/images/welcomebackground.jpg";
 import round from "../utils/images/round.png";
@@ -13,18 +12,17 @@ import addsession from "../utils/images/new-page.png";
 
 const Container = styled.div`
 height: 100vh;
-flex: 1;
 display: flex;
 justify-content: center;
 align-items: flex-start;
 overflow-y: scroll;
-overflow-x: scroll;
-width: 100%; /* Ensure full width */
+overflow-x: hidden;
+width: 100%;
 `;
 
 const Wrapper = styled.div`
-flex: 1;
-max-width: 100%; /* Ensure full width */
+width: 100%;
+max-width: 1500px;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -32,14 +30,15 @@ flex-direction: column;
 `;
 
 const CardWrapper = styled.div`
-flex: 1;
-max-width: 100%; /* Adjust to your preference */
+width: 100%;
+max-width: 1500px;
 display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-padding: 140px;
+padding: 140px 20px; // Add side padding for smaller screens
 gap: 30px;
+box-sizing: border-box;
 `;
 
 const CardWrapper2 = styled.div`
@@ -54,14 +53,14 @@ align-items: center;
 flex-wrap: wrap;
 display: flex;
 gap: 60px;
-padding: 30px;
+padding: 30px 20px; // Add side padding for smaller screens
 flex-direction: column;
+box-sizing: border-box;
 `;
 
 const Card = styled.div`
 height: 200px;
 width: 100%;
-min-width: 2000px;
 padding: 24px;
 align-items: center;
 border-radius: 20px;
@@ -69,29 +68,29 @@ background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.60));
 box-shadow: 1px 6px 20px 0px ${({ theme }) => theme.black + 15};
 display: flex;
 flex-direction: column;
-@media (max-width: 768px){
+@media (max-width: 830px) {
   height: 100px;
 }
 `;
 
 const Button = styled.div`
 height: 10px;
-width: 300px;
+width: 100%;
+max-width: 300px;
 padding: 30px;
-display: flex; 
-justify-content: center; 
-align-items: center; 
+display: flex;
+justify-content: center;
+align-items: center;
 border: 1px solid ${({ theme }) => theme.red};
 border-radius: 20px;
 cursor: pointer;
-background: ${({ isHovered, theme }) => (isHovered ? theme.red :  theme.black )};
+background: ${({ isHovered, theme }) => (isHovered ? theme.red : theme.black)};
 box-shadow: 1px 6px 20px 0px ${({ theme }) => theme.black + 15};
 transition: background 0.3s ease;
-@media (max-width: 768px) {
-  border-radius: 10px;
+@media (max-width: 830px) {
+  border-radius: 20px;
   width: 200px;
   height: 3px;
-  border-radius: 20px;
 }
 `;
 
@@ -99,20 +98,20 @@ const ButtonText = styled.div`
 font-weight: 500;
 color: white;
 font-size: 25px;
-@media (max-width: 768px){
+@media (max-width: 830px) {
   font-size: 20px;
 }
 `;
 
 const OuterCard2 = styled.div`
-height: 400px;
+height: auto;
 width: 100%;
 border-radius: 20px;
-background-color: ${({ theme }) => theme.red}
+background-color: ${({ theme }) => theme.red};
 box-shadow: 1px 6px 20px 0px ${({ theme }) => theme.black + 15};
 display: flex;
-@media (max-width: 768px){
-  height: 900px;
+@media (max-width: 1000px) {
+  height: auto;
 }
 `;
 
@@ -123,17 +122,20 @@ border-radius: 20px;
 background: linear-gradient(to bottom, ${({ theme }) => theme.black}, ${({ theme }) => theme.red});
 box-shadow: 1px 6px 20px 0px ${({ theme }) => theme.black + 15};
 display: flex;
+padding: 25px;
 justify-content: center;
-@media (max-width: 768px){
+@media (max-width: 1000px) {
   flex-direction: column;
   align-items: center;
+}
 `;
 
 const Card3 = styled.div`
-height: 1050px;
+height: auto;
 width: 100%;
-min-width: 2000px;
+max-width: 100vw;
 padding: 50px;
+box-sizing: border-box;
 border: 1px solid ${({ theme }) => theme.black + 20};
 border-radius: 20px;
 background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.80));
@@ -143,25 +145,25 @@ flex-direction: column;
 align-items: center;
 @media (max-width: 768px) {
   height: 1400px;
-  }
+}
 `;
 
 const FeaturesCard = styled.div`
-height: 200px;
-width: 700px;
+height: auto;
+width: 100%;
+max-width: 700px;
 padding: 24px;
 border: 5px solid ${({ theme }) => theme.red};
-border-radius: 20px;
+border-radius: 30px;
 display: flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;  
 box-shadow: 1px 6px 20px 0px ${({ theme }) => theme.black + 15};
 @media (max-width: 768px) {
-  border-radius: 10px;
+  border-radius: 20px;
   width: 250px;
   height: 250px;
-  border-radius: 20px;
 }
 `;
 
@@ -169,7 +171,7 @@ const FeaturesText = styled.div`
 font-weight: 800;
 color: ${({ theme }) => theme.white};
 font-size: 60px;
-@media (max-width: 768px){
+@media (max-width: 768px) {
   font-size: 40px;
 }
 `;
@@ -178,7 +180,7 @@ const Text = styled.div`
 font-weight: 500;
 color: white;
 font-size: 40px;
-@media (max-width: 768px){
+@media (max-width: 830px) {
   font-size: 16px;
 }
 `;
@@ -187,7 +189,7 @@ const Text2 = styled.div`
 font-weight: 800;
 color: ${({ theme }) => theme.red};
 font-size: 60px;
-@media (max-width: 768px){
+@media (max-width: 830px) {
   font-size: 40px;
 }
 `;
@@ -195,9 +197,9 @@ font-size: 60px;
 const Text3 = styled.div`
 font-weight: 500;
 color: white;
-padding: 50px;
+padding: 35px;
 font-size: 25px;
-@media (max-width: 768px){
+@media (max-width: 768px) {
   font-size: 20px;
   padding: 30px;
 }
@@ -209,7 +211,7 @@ color:  ${({ theme }) => theme.red};
 padding: 20px;
 text-align: center;
 font-size: 25px;
-@media (max-width: 768px){
+@media (max-width: 768px) {
   font-size: 18px;
   padding: 20px;
 }
@@ -220,7 +222,7 @@ font-weight: 500;
 color: white;
 font-size: 20px;
 text-align: center;
-@media (max-width: 768px){
+@media (max-width: 768px) {
   font-size: 14px;
   padding: 3px;
 }
@@ -240,7 +242,7 @@ z-index: -1;
 
 const Icon = styled.img` 
 width: 200px;
-@media (max-width: 768px){
+@media (max-width: 1000px) {
   width: 150px;
 }
 `;
@@ -251,7 +253,7 @@ position: absolute;
 top: 50%; // centers the icon2
 left: 50%;
 transform: translate(-50%, -50%);
-@media (max-width: 768px){
+@media (max-width: 1000px) {
   width: 55px;
 }
 `;
@@ -262,7 +264,7 @@ position: absolute;
 top: 50%; // centers the icon2
 left: 50%;
 transform: translate(-50%, -50%);
-@media (max-width: 768px){
+@media (max-width: 1000px) {
   width: 55px;
 }
 `;
@@ -272,8 +274,8 @@ width: 50px;
 `;
 
 const IconContainer = styled.div`
-  position: relative;
-  display: inline-block;
+position: relative;
+display: inline-block;
 `;
 
 const Welcome = ({ setIsWelcomePageOpen }) => { //pass in setIsLoginRequested to welcome
