@@ -24,7 +24,7 @@ align-items: center;
 gap: 22px;
 @media (max-width: 768px){
     flex-direction: column;
-    padding: 0px 0px 50px 0px
+    padding: 0px 0px 150px 0px;
 }
 `;
 
