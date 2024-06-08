@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import Button from './Button';
 import TextInput from './TextInput';
 import PropTypes from 'prop-types';
-
 
 const Container = styled.div`
 width: 100%;
@@ -35,8 +34,10 @@ const TextAlign = styled.div`
 text-align: left;
 `;
 
-async function loginUser(credentials) {
-  return fetch('https://combat-clinic.onrender.com/auth/login', { // Update the endpoint here
+async function signUpUser(credentials) {
+  return fetch('https://combat-clinic.onrender.com/auth/signup', { // Update the endpoint here
+  //return fetch('http://localhost:8080/auth/signup', 
+    
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -46,25 +47,27 @@ async function loginUser(credentials) {
     .then((data) => data.json());
 }
 
-const SignIn = ({ setToken }) => {
+const SignUp = ({ setToken }) => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
+
   const handleSubmit = async (e) => {
     if (e) {
       e.preventDefault();
     }
-    const token = await loginUser({
+    const token = await signUpUser({
+      name,
       email,
       password
     });
     setToken(token);
   }
+
   return <Container>
       <div>
-        <Title>Welcome to</Title>
-        <Title>Combat Clinic</Title>
-        <Span>Please enter sign in info</Span>
+        <Title>Welcome to Combat Clinic</Title>
+        <Span>Please enter details to sign up</Span>
       </div>
       <div style={{
         display: "flex",
@@ -72,7 +75,14 @@ const SignIn = ({ setToken }) => {
         flexDirection: "column",
       }}>
         <TextAlign>
+        <TextInput  label="Full Name" placeholder="Enter your full name"
+        value={name}
+        handleChange={(e) => setName(e.target.value)}
+        />
+        </TextAlign>
+        <TextAlign>
         <TextInput label="Email Address" placeholder="Enter your email address"
+        value={email}
         handleChange={(e) => setEmail(e.target.value)}
         />
         </TextAlign>
@@ -81,15 +91,15 @@ const SignIn = ({ setToken }) => {
         handleChange={(e) => setPassword(e.target.value)}
         />
         </TextAlign>
-        <Button text="Sign In" onClick={(e) => handleSubmit(e)}
+        <Button text="Sign Up" onClick={(e) => handleSubmit(e)}
         />
       </div>
     </Container>
 
 }
 
-SignIn.propTypes = {
+SignUp.propTypes = {
   setToken: PropTypes.func.isRequired
 }
 
-export default SignIn
+export default SignUp
