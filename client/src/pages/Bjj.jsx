@@ -48,31 +48,6 @@ margin-top: 1;
 }
 `;
 
-/*const Card = styled.div`
-  min-height: 500px;
-  width: 700px;
-  padding: 24px;
-  border: 1px solid ${({ theme }) => theme.black + 20};
-  border-radius: 20px;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.80));
-  box-shadow: 1px 6px 20px 0px ${({ theme }) => theme.black + 15};
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  @media (max-width: 768px) {
-    padding: 16px;
-    width: 650px;
-    border-radius: 20px;
-  }
-  @media screen and (max-height: 800px) {
-    top: 40px;
-  }
-`;
-*/
-
 const Text = styled.div`
 font-weight: 800;
 color: white;
@@ -80,7 +55,7 @@ font-size: 60px;
 padding: 10px;
 text-align: center;
 @media (max-width: 450px) {
-  font-size: 40px;
+  font-size: 35px;
 }
 `;
 
@@ -97,7 +72,7 @@ text-decoration: none;
   color: ${({ theme }) => theme.red};
 }
 @media (max-width: 450px) {
-  font-size: 25px;
+  font-size: 20px;
 }
 `;
 
