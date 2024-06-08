@@ -26,6 +26,7 @@ gap: 22px;
 flex-direction: column;
 @media (max-width: 600px){
     gap: 12px;
+    padding: 0px 0px 50px 0px
 }
 `;
 
@@ -79,13 +80,11 @@ flex-direction: column;
 margin-top: 1;
 @media (max-width: 768px) {
   padding: 16px;
-  border-radius: 10px;
   width: 650px;
   border-radius: 20px;
 }
 @media (max-width: 450px) {
   padding: 16px;
-  border-radius: 10px;
   width: 320px;
   border-radius: 20px;
   height: auto;
@@ -109,8 +108,6 @@ display: flex;
 align-items: center; 
 justify-content: center; 
 `;
-
-
 
 const Image = styled.img`
 width: 100px;
