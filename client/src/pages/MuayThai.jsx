@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from "react";
 
@@ -56,7 +55,7 @@ font-size: 50px;
 padding: 10px;
 text-align: center;
 @media (max-width: 450px) {
-  font-size: 40px;
+  font-size: 35px;
 }
 `;
 
@@ -74,7 +73,7 @@ text-decoration: none;
   color: ${({ theme }) => theme.red};
 }
 @media (max-width: 450px) {
-  font-size: 25px;
+  font-size: 20px;
 }
 `;
 
