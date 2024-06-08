@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import styled,  { ThemeProvider } from "styled-components";
+import React, { useState } from "react";
+import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import bjjImage from "../utils/images/jiujitsu.png";
 import thaiImage from "../utils/images/muaythai.png";
@@ -319,6 +319,17 @@ const AddSession = () => {
       } else {
         console.log("Please fill in all fields before adding the session.");
       }
+  
+    };
+    
+    const allFieldsFilled = clickedLink && clickedImage && techTextBoxValue && timeTextBoxValue && selectedDate;
+
+    const handleTimeChange = (e) => {
+      const value = e.target.value;
+      // Ensure the value is numeric
+      if (/^\d*$/.test(value)) {
+        timeSetTextBoxValue(value);
+      }
     };
     
     
@@ -355,7 +366,7 @@ const AddSession = () => {
                     <TextBox2 
                     type="text"
                     value={timeTextBoxValue}
-                    onChange = {(e) => timeSetTextBoxValue(e.target.value)}
+                    onChange = {handleTimeChange}
                     placeholder="Min"
                     />
                 </Text>
@@ -383,7 +394,7 @@ const AddSession = () => {
             </Text>
             </CardContainer>
             <ButtonContainer>
-            <StyledLink to='/'>
+            <StyledLink to={allFieldsFilled ? '/' : '#'}>
             <Button 
               isHovered={isHovered} // Ensure the prop is passed correctly
               onMouseEnter={() => setIsHovered(true)}
