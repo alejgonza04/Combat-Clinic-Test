@@ -56,7 +56,7 @@ font-size: 60px;
 padding: 10px;
 text-align: center;
 @media (max-width: 450px) {
-  font-size: 40px;
+  font-size: 35px;
 }
 `;
 
@@ -73,7 +73,7 @@ text-decoration: none;
   color: ${({ theme }) => theme.red};
 }
 @media (max-width: 450px) {
-  font-size: 25px;
+  font-size: 20px;
 }
 `;
 
