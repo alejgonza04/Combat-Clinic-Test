@@ -32,7 +32,7 @@ const Label = styled.label`
 
 const OutlinedInput = styled.div`
   border-radius: 8px;
-  border: 0.5px solid ${({ theme }) => theme.white};
+  border: 2px solid ${({ theme }) => theme.white};
   background-color: transparent;
   color: ${({ theme }) => theme.text_primary};
   outline: none;
