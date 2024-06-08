@@ -36,7 +36,7 @@ text-align: left;
 `;
 
 async function loginUser(credentials) {
-  return fetch('http://localhost:8080/auth/login', { // Update the endpoint here
+  return fetch('https://combat-clinic.onrender.com/auth/login', { // Update the endpoint here
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
