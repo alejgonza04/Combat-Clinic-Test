@@ -282,6 +282,17 @@ const StyledLink = styled(Link)`
   text-decoration: none; /* Remove underline */
 `;
 
+async function createSession(sessionData){
+  return fetch ('https://combat-clinic.onrender.com/addsession', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(sessionData),
+  })
+    .then((sessionData) => sessionData.json());
+
+};
 
 const AddSession = () => {
     const [clickedLink, setClickedLink] = useState(null);
@@ -297,25 +308,33 @@ const AddSession = () => {
     const { addSession } = useSession();
 
 
-    const handleAddItem = () => {
+    const handleAddItem = async () => {
       if (clickedLink && clickedImage && techTextBoxValue && timeTextBoxValue && selectedDate) {
         // Combine all selected values into an object or array
-        const newItem = {
+        const sessionData = {
           sessionType: clickedImage,
           sessionLength: clickedLink,
           sparringTime: timeTextBoxValue + " min",
           techniques: techTextBoxValue,
           date: selectedDate
         };
-        addSession(newItem);
-        navigate('/sessions');
-    
-        // Update the item Map with the new item
-        setItem(prevItem => {
-          const updatedItem = new Map([...prevItem, [prevItem.size, newItem]]);
-          console.log("Updated item:", updatedItem);
-          return updatedItem;
-        });
+
+        try {
+          const response = await createSession(sessionData);
+
+          addSession(response);
+          navigate('/sessions');
+
+          // Update the item Map with the new item
+          setItem(prevItem => {
+            const updatedItem = new Map([...prevItem, [prevItem.size, sessionData]]);
+            console.log("Updated item:", updatedItem);
+            return updatedItem;
+          });
+        } catch (error) {
+          console.error('Error creating session:', error);
+        }
+       
       } else {
         console.log("Please fill in all fields before adding the session.");
       }
@@ -413,3 +432,4 @@ const AddSession = () => {
 }
 
 export default AddSession
+
