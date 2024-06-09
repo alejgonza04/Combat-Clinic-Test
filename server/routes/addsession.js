@@ -1,5 +1,5 @@
 import express from 'express';
-import { authMiddleware } from './routes/auth.js';
+import { authMiddleware } from './auth.js';
 import Session from '../models/Session.js';
 
 
