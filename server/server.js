@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 import cors from 'cors';
 import connectDB from './config/db.js';
 import authRoutes from './routes/auth.js';
-import addSessionRoutes from '../routes/addSession.js';
+import addSessionRoutes from '../routes/addsession.js';
 
 dotenv.config();
 
