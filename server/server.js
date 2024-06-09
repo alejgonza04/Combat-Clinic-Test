@@ -28,6 +28,13 @@ const startServer = async () => {
         app.listen(8080, () => console.log('Server started on port http://localhost:8080'));
     } catch (error) {
         console.log(error);
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ success: false, error: 'Invalid session data' });
+        } else if (error.name === 'MongoError' && error.code === 11000) {
+            return res.status(400).json({ success: false, error: 'Duplicate session data' });
+        } else {
+            return res.status(500).json({ success: false, error: 'Server Error' });
+        }
     }
 }
 
