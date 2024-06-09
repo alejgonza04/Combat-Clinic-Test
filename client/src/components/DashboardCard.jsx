@@ -69,6 +69,10 @@ display: flex;
 const DashboardCard = () => {
   const { sessions } = useSession();
 
+  if (!sessions || !Array.isArray(sessions)) {
+    return <div>No sessions available.</div>;
+  }
+
   const totalTrainingTime = sessions.reduce((total, session) => {
     const sessionLength = parseInt(session.sessionLength.replace('h',''));
     return total + sessionLength;
