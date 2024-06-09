@@ -282,17 +282,28 @@ const StyledLink = styled(Link)`
   text-decoration: none; /* Remove underline */
 `;
 
-async function createSession(sessionData){
-  return fetch ('https://combat-clinic.onrender.com/addsession', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(sessionData),
-  })
-    .then((sessionData) => sessionData.json());
+async function createSession(sessionData, token) {
+  try {
+    const response = await fetch('https://combat-clinic.onrender.com/addsession', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify(sessionData),
+    });
 
-};
+    if (!response.ok) {
+      throw new Error('Failed to add session');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Add session error:', error.message);
+    throw error;
+  }
+}
 
 const AddSession = () => {
     const [clickedLink, setClickedLink] = useState(null);
