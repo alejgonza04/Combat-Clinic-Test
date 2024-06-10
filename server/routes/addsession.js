@@ -8,29 +8,29 @@ const router = express.Router();
 // Add middleware to ensure authentication before adding a session
 router.use(authMiddleware);
 
-router.post('/addsession', async (req, res) => {
+router.post('/addsession', authMiddleware, async (req, res) => {
     try {
         const { sessionType, sessionLength, sparringTime, techniques, date } = req.body;
-        
-        // Get the user ID from the authenticated user's data
-        const userId = req.user.id;
-
-        const session = new Session({
-            sessionType,
-            sessionLength,
-            sparringTime,
-            techniques,
-            date,
-            user: userId // Associate the session with the logged-in user
-        });
-        
-        //save session to database
+        const userId = req.user.id; // Get user ID from token
+        // Save session associated with the user
+        const session = new Session({ sessionType, sessionLength, sparringTime, techniques, date, userId });
         await session.save();
-        res.status(201).json({ success: true, data: session });
-        
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, error: 'Server Error' });
+        res.json({ message: 'Session added successfully' });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+// Route to get user's sessions
+router.get('/usersessions', authMiddleware, async (req, res) => {
+    try {
+        const userId = req.user.id; // Get user ID from token
+        const sessions = await Session.find({ userId });
+        res.json(sessions);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
     }
 });
 
