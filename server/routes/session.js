@@ -1,6 +1,6 @@
 import express from 'express';
 import { addSession, getSessions } from '../controllers/sessionController.js';
-import auth from '../middleware/auth.js';
+import auth from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
