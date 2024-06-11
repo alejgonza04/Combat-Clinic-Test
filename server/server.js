@@ -1,24 +1,44 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import * as dotenv from 'dotenv';
 import cors from 'cors';
+import connectDB from './config/db.js';
 import sessionRoutes from './routes/session.js';
 import userRoutes from './routes/user.js';
-import dotenv from 'dotenv';
+
 
 dotenv.config();
 
 const app = express();
 app.use(cors({
-   origin: 'https://verdant-fairy-45e354.netlify.app' 
-}));
+    origin: 'https://verdant-fairy-45e354.netlify.app' // Allow requests from this origin
+  }));
 app.use(express.json());
+
+connectDB();
+
+app.get('/', (req, res) => {
+    res.send('Hello, World!');
+});
 
 app.use('/sessions', sessionRoutes);
 app.use('/user', userRoutes);
 
-const CONNECTION_URL = process.env.CONNECTION_URL || 'mongodb+srv://alejandrgonzalez:ctEFB9Opvfoyuzrj@cluster0.tb2b9cf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';;
-const PORT = process.env.PORT || 5000;
+const startServer = async () => {
+    try {
 
-mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}`)))
-  .catch((error) => console.log(`${error} did not connect`));
+        app.listen(8080, () => console.log('Server started on port http://localhost:8080'));
+    } catch (error) {
+        console.log(error);
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ success: false, error: 'Invalid session data' });
+        } else if (error.name === 'MongoError' && error.code === 11000) {
+            return res.status(400).json({ success: false, error: 'Duplicate session data' });
+        } else {
+            return res.status(500).json({ success: false, error: 'Server Error' });
+        }
+    }
+}
+
+//app.listen(8080, () => console.log('Server started on port http://localhost:8080'));
+
+startServer();
