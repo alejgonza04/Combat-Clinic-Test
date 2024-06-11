@@ -7,18 +7,20 @@ const opts = {
   secretOrKey: process.env.JWT_SECRET || 'your_secret_key',
 };
 
-passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {
-  try {
-    const user = await User.findById(jwt_payload.id);
-    if (user) {
-      return done(null, user);
-    } else {
-      return done(null, false);
+const passportConfig = (passport) => {
+  passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {
+    try {
+      const user = await User.findById(jwt_payload.id);
+      if (user) {
+        return done(null, user);
+      } else {
+        return done(null, false);
+      }
+    } catch (err) {
+      return done(err, false);
     }
-  } catch (err) {
-    return done(err, false);
-  }
-}));
+  }));
+};
 
-export default passport;
+export default passportConfig;
 
