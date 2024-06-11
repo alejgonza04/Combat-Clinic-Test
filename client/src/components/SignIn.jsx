@@ -35,25 +35,15 @@ const TextAlign = styled.div`
 text-align: left;
 `;
 
-async function loginUser(credentials, setToken) {
-  try {
-    const response = await fetch('https://combat-clinic.onrender.com/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(credentials),
-    });
-
-    if (!response.ok) {
-      throw new Error('Invalid credentials');
-    }
-
-    const data = await response.json();
-    setToken(data.token);
-  } catch (error) {
-    console.error('Login error:', error.message);
-  }
+async function loginUser(credentials) {
+  return fetch('https://combat-clinic.onrender.com/user/signin', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(credentials),
+  })
+    .then((data) => data.json());
 }
 
 const SignIn = ({ setToken }) => {
@@ -64,11 +54,15 @@ const SignIn = ({ setToken }) => {
     if (e) {
       e.preventDefault();
     }
-    const token = await loginUser({
-      email,
-      password
-    });
-    setToken(token);
+    const credentials = { email, password };
+    const response = await loginUser(credentials);
+    console.log('Response:', response);
+    if (response.token) {
+      setToken(response.token);
+      localStorage.setItem('token', response.token);
+    } else {
+      console.error('Login failed:', response.message);
+    }
   }
   return <Container>
       <div>
