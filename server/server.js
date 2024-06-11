@@ -8,7 +8,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+   origin: 'https://verdant-fairy-45e354.netlify.app' 
+}));
 app.use(express.json());
 
 app.use('/sessions', sessionRoutes);
