@@ -71,6 +71,23 @@ z-index: -1;
 const App = () => {
   const {token, setToken} = useToken();
   const [isWelcomePageOpen, setIsWelcomePageOpen] = useState(true);
+  const [email, setEmail] = useState(''); // State variable to store user's email
+
+  useEffect(() => {
+    const fetchUserEmail = async () => {
+      try {
+        const response = await axios.get('/user/email', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setEmail(response.data.email);
+      } catch (error) {
+        console.error('Error fetching user email:', error);
+      }
+    }
+    });
+
   return (
   <ThemeProvider theme={lightTheme}>
   <BrowserRouter>
@@ -99,7 +116,7 @@ const App = () => {
       {isWelcomePageOpen ? (
         <Welcome setIsWelcomePageOpen={setIsWelcomePageOpen}/>
       ) : (
-        <Authentication setToken={setToken}/>
+        <Authentication setToken={setToken} setEmail={setEmail}/>
       )}
     </Container>
     )}
