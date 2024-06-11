@@ -4,11 +4,13 @@ import cors from 'cors';
 import connectDB from './config/db.js';
 import sessionRoutes from './routes/session.js';
 import userRoutes from './routes/user.js';
+import passportConfig from './config/passport.js';
 
 
 dotenv.config();
 
 const app = express();
+passportConfig(passport);
 app.use(cors({
     origin: 'https://verdant-fairy-45e354.netlify.app' // Allow requests from this origin
   }));
