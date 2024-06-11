@@ -5,6 +5,7 @@ import User from '../models/user.js';
 const SECRET_KEY = process.env.JWT_SECRET || 'your_secret_key'; // use environment variable for the secret key
 
 export const signin = async (req, res) => {
+    console.log('Signin request received');
     const { email, password } = req.body;
     try {
         const existingUser = await User.findOne({ email });
@@ -18,6 +19,7 @@ export const signin = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong.' });
     }
+    console.log('Signin request processed');
 }
 
 export const signup = async (req, res) => {
