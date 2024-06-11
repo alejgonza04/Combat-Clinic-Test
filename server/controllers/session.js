@@ -25,7 +25,7 @@ export const getSession = async (req, res) => {
     }
 }
 
-export const createSession = async (req, res) => {
+export const addSession = async (req, res) => {
     const { sessionType, sessionLength, sparringTime, techniques, date } = req.body;
 
     const newSessionMessage = new SessionMessage({ sessionType, sessionLength, sparringTime, techniques, date })
